@@ -1,4 +1,4 @@
-//Variation 1 		- Lacking / doesn’t work as intended
+//Variation 1
 #include <stdio.h>
 #define MAX 4
 
@@ -14,32 +14,22 @@ typedef struct {
 
 typedef int List;
 
+void initialize(VHeap *V);
+int allocSpace(VHeap* V);
+void deallocSpace(VHeap* V, int index);
+void display(int L, VHeap V);
+void insertFirst(int* L, VHeap* V, int elem);
+void insertLast(int* L, VHeap* V, int elem);
+void insertSorted(int* L, VHeap* V, int elem);
+void deleteElem(int* L, VHeap* V, int elem);
+void deleteAllOccurrence(int* L, VHeap* V, int elem);
+
 int main(){
     VHeap V;
     List L = -1;
     initialize(&V);
-
-    insertFirst(&L, &V, 3);
-    insertFirst(&L, &V, 1);
-    insertLast(&L, &V, 5);
-    insertSorted(&L, &V, 4);
-    insertSorted(&L, &V, 2);
-    printf("List after inserts: ");
-    display(L, V);
-
-    deleteElem(&L, &V, 3);
-    printf("List after deleting 3: ");
-    display(L, V);
-
-    insertLast(&L, &V, 2);
-    insertFirst(&L, &V, 2);
-    printf("List with duplicates: ");
-    display(L, V);
-
-    deleteAllOccurrence(&L, &V, 2);
-    printf("List after deleting all 2s: ");
-    display(L, V);
 }
+
 void initialize(VHeap *V){
     V->avail = 0;
     for(int i = 0; i < MAX - 1; i++)
@@ -64,7 +54,6 @@ void display(int L, VHeap V){
         printf("%d ", V.H[i].elem);
     printf("\n");    
 }
-
 
 /* INSERTING */
 void insertFirst(int* L, VHeap* V, int elem){
@@ -102,7 +91,6 @@ void insertSorted(int* L, VHeap* V, int elem){
     *trav = newCell;
 }
 
-
 /* DELETING */
 void deleteElem(int* L, VHeap* V, int elem){
     int *trav = L;
@@ -127,16 +115,4 @@ void deleteAllOccurrence(int* L, VHeap* V, int elem){
         else trav = &V->H[*trav].next;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
